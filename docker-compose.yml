@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+   db_app_1:
+     container_name: db_app_1
+     restart: always
+     image: postgres:12
+     environment:
+       - POSTGRES_PASSWORD=${DB_PASSWORD}
+
+   web_app_d_1:
+     container_name: web_app_1
+     restart: always
+     build:
+       dockerfile: ./web_app_1.dockerfile
+       context: .
+     ports:
+       - "8000:8000"
+     depends_on:
+       - db_app_1
